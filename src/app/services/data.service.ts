@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Product } from '../models/product.model';
 
@@ -30,5 +30,9 @@ export class DataService {
         null,
         { headers: this.composeHeaders() }
     );
-}
+  }
+
+  create(data) {
+    return this.http.post(`${this.url}/accounts`, data);
+  }
 }
