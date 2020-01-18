@@ -8,7 +8,6 @@
           <ul class="uk-navbar-nav">
             <li><a [routerLink]="['/']" routerLinkActive="uk-text-bold">Products</a></li>
             <li><a [routerLink]="['/account/pets']" routerLinkActive="uk-text-bold">My Pets</a></li>
-            <li><a href="#">Consultations</a></li>
           </ul>
         </div>
         <div class="uk-navbar-right">
@@ -20,7 +19,7 @@
               </a>
             </li>
             <li>
-              <a href="/account">
+              <a [routerLink]="['/account']">
                 <span class="uk-icon uk-margin-small-right" uk-icon="icon: user"></span>
                 {{user?.name}}
               </a>
