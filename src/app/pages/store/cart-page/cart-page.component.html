@@ -1,59 +1,57 @@
-<div class="uk-container">
-  <nav class="uk-navbar-container" uk-navbar>
-    <div class="uk-navbar-left">
-      <ul class="uk-navbar-nav">
-        <li class="uk-active">My Cart</li>
-      </ul>
-    </div>
-    <div class="uk-navbar-right">
-      <ul class="uk-navbar-nav">
-        <li class="uk-active">
-          <a href="#">
-            <span class="uk-icon uk-margin-small-right" uk-icon="icon: close"></span>
-            Clear Cart
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<div *ngIf="cart?.items.length > 0">
   <div class="uk-container">
-    <div class="uk-grid-small" uk-grid>
-      <div class="uk-width-expand" uk-leader>
-        <img src="https://placehold.it/64" class="uk-align-left" alt="">
-        <a href="#">Soft fur shampoo</a> <br>
-        <strong>2 unit(s)</strong>
+    <nav class="uk-navbar-container" uk-navbar>
+      <div class="uk-navbar-left">
+        <ul class="uk-navbar-nav">
+          <li class="uk-active">My Cart</li>
+        </ul>
       </div>
-      <div>
-        <br>
-        € 10.00
-        <a href="#" class="uk-button uk-button-link uk-align-right">
-          <span class="uk-icon" uk-icon="icon: close"></span>
-        </a>
+      <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+          <li class="uk-active">
+            <a (click)="clear()">
+              <span class="uk-icon uk-margin-small-right" uk-icon="icon: close"></span>
+              Clear Cart
+            </a>
+          </li>
+        </ul>
       </div>
-    </div>
-    <div class="uk-grid-small" uk-grid>
-      <div class="uk-width-expand" uk-leader>
-        <img src="https://placehold.it/64" class="uk-align-left" alt="">
-        <a href="#">Soft fur shampoo</a> <br>
-        <strong>2 unit(s)</strong>
+    </nav>
+    <div class="uk-container">
+      <div class="uk-grid-small" uk-grid *ngFor="let item of cart?.items">
+        <div class="uk-width-expand" uk-leader>
+          <img src="{{ item.image }}" class="uk-align-left" alt="{{ item.product }}" width="64" height="64">
+          <a href="#">{{ item.product }}</a> <br>
+          <strong>{{ item.quantity }} unit(s)</strong>
+        </div>
+        <div>
+          <br>
+          {{item.price/100 | currency: 'EUR'}}
+          <a class="uk-button uk-button-link uk-align-right" (click)="remove(item)">
+            <span class="uk-icon" uk-icon="icon: close"></span>
+          </a>
+        </div>
       </div>
-      <div>
-        <br>
-        € 10.00
-        <a href="#" class="uk-button uk-button-link uk-align-right">
-          <span class="uk-icon" uk-icon="icon: close"></span>
-        </a>
-      </div>
-    </div>
-  </div>
 
 
-  <div class="uk-text-right">
-    <h3 class="uk-text-right">
-      TOTAL € 20.00
-    </h3>
-    <a href="/checkout" class="uk-button uk-button-large uk-button-primary uk-margin-small-bottom">
-      FINALIZE ORDER
-    </a>
+    <div class="uk-text-right">
+      <h3 class="uk-text-right">
+        {{total()/100 | currency: 'EUR'}}
+      </h3>
+      <a href="/checkout" class="uk-button uk-button-large uk-button-primary uk-margin-small-bottom">
+        FINALIZE ORDER
+      </a>
+    </div>
   </div>
+</div>
+
+
+<div class="uk-container" *ngIf="cart?.items.length == 0">
+  <br>
+  <br>
+  <br>
+  <p class="uk-text-center"><em>Your cart is empty!</em></p>
+  <br>
+  <br>
+  <br>
 </div>
